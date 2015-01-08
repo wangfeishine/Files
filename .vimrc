@@ -89,4 +89,4 @@ command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 	 	\ | wincmd p | diffthis
 set softtabstop=4
 set shiftwidth=4
-set noexpandtab
+set expandtab
