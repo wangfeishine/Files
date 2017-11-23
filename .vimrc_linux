@@ -1,0 +1,113 @@
+set nocompatible
+" history存储长度
+set history=200
+" 检测文件类型
+filetype on
+" 针对不同文件类型采用不同缩进格式
+filetype indent on
+" 允许插件
+filetype plugin on
+" 启动自动补全
+filetype plugin indent on
+" 取消兼容
+set nocompatible
+" 文件修改后自动载入
+set autoread
+
+" 取消备份
+set nobackup
+set nowb
+set noswapfile
+set noundofile
+
+" 解决中文编码
+set encoding=utf-8
+
+" 显示行号
+set nu
+" 取消换行
+set nowrap
+
+" 括号配对
+set showmatch
+" How manay tenth of a second to blink when matching brackets
+set mat=2
+
+" 设置文内自动搜索提示
+" 高亮Search命中文本
+set hlsearch
+" 搜索时忽略大小写
+set ignorecase
+" 随着键时自动搜索
+set incsearch
+" 有一个或以上大写字母时仍大小写敏感
+set smartcase
+
+" 代码不折叠
+set nofoldenable
+
+" 显示当前行号
+set ruler
+
+" 在状态栏显示正在输入的命令
+set showmode
+
+" 自动缩进格式
+if has("autocmd")
+    filetype plugin indent on
+else
+    set autoindent
+endif
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+" 突出显示当前行
+set cursorline
+
+syntax on
+set background=dark
+colorscheme desert
+
+call plug#begin('~/.vim/plugged')
+	Plug 'scrooloose/nerdtree'
+	Plug 'jistr/vim-nerdtree-tabs'
+	Plug 'Xuyuanp/nerdtree-git-plugin'
+	"Plug 'Valloric/YouCompleteMe'
+	Plug 'Raimondi/delimitMate'
+	Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
+    " 加强版状态栏
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    " html 5
+    Plug 'othree/html5.vim'
+    " 语法高亮|检查
+    Plug 'sheerun/vim-polyglot'
+    Plug 'w0rp/ale'
+    " 文件|代码搜索
+    Plug 'rking/ag.vim'
+    Plug 'kien/ctrlp.vim'
+call plug#end()
+
+" 树形目录
+autocmd vimenter * NERDTree
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+let g:NERDTreeShowIgnoredStatus=1
+let g:nerdtree_tabs_open_on_console_startup=1
+let g:NERDTreeIndicatorMapCustom={ "Modified" : "✹", "Staged" : "✚", "Untracked" : "✭", "Renamed" : "➜", "Unmerged" : "═", "Deleted" : "✖", "Dirty" : "✗", "Clean" : "✔︎", 'Ignored' : '☒', "Unknown" : "?" }
+
+" 加强版状态栏
+let g:airline_theme='papercolor'
+
+" 语法高亮|检查
+let g:ale_linters={ 'javascript': ['eslint'], 'css': ['stylelint'],}
+let g:ale_fixers={ 'javascript': ['eslint'], 'css': ['stylelint'],}
+let g:ale_fix_on_save=1
+let g:ale_sign_column_always=1
+let g:ale_sign_error='●'
+let g:ale_sign_warning='▶'
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap) 
